@@ -11,9 +11,9 @@ AFRAME.registerComponent('info-panel', {
 
     this.movieInfo = {
       karigurashiButton: {
-        title: 'Heterotropia',
+        title: 'Strabismus',
         imgEl: document.querySelector('#karigurashiMovieImage'),
-        description: 'Strabismus (crossed eyes) is a condition in which the eyes do not line up with one another. In other words, one eye is turned in a direction that is different from the other eye. Under normal conditions, the six muscles that control eye movement work together and point both eyes at the same direction. Patients with strabismus have problems with the control of eye movement and cannot keep normal ocular alignment (eye position).',
+        description: 'Strabismus (crossed eyes) is a condition in which the eyes do not line up with one another. In other words, one eye is turned in a direction that is different from the other eye. In this exercise, we will be providing a therapeutic training to the muscles of lazy eye by hiding objects from the good eye',
         siteURL: 'equation-game.html'
       },
       kazetachinuButton: {

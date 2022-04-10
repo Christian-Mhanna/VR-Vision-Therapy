@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Vision Therapy VR</title>
+    <title>Clear View VR</title>
     <meta name="description" content="Laser input UI • A-Frame" />
     <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@master/dist/aframe-master.js"></script>
     <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
@@ -12,11 +12,12 @@
   </head>
   <body>
     <a-scene
-      environment="preset: default; shadow: true"
+      environment="preset: starry; shadow: true"
       cursor="rayOrigin: mouse; fuse: false"
       raycaster="objects: .raycastable"
       info-message="htmlSrc: #messageText"
     >
+      
       <a-assets>
         <a-asset-item id="messageText" src="message.html"></a-asset-item>
         <img
@@ -49,26 +50,26 @@
         -->
         <img
           id="karigurashi"
-          src="https://cdn.glitch.global/ff4222f6-6bd2-4c65-bbec-389620a299da/Strabismus-Heterotropia1.png?v=1648050982110"
+          src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/Menu%20Screen.jpg?v=1649585724082"
           crossorigin="anonymous"
         />
         <img
           id="karigurashiPoster"
-          src="https://cdn.glitch.global/ff4222f6-6bd2-4c65-bbec-389620a299da/Strabismus-Heterotropia1.png?v=1648050982110"
+          src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/Menu%20Screen.jpg?v=1649585724082"
           crossorigin="anonymous"
         />
         <a-mixin
           id="frame"
           scale="1.5 1 1.5"
-          geometry="primitive: plane; width: 0.5783552; height: 0.8192"
-          material="color: white; shader: flat"
+          geometry="primitive: plane; width: 0.63; height: 0.63"
+          material="color: black; shader: flat; opacity: 0"
           animation__scale="property: scale; to: 2 1.333 2; dur: 200; startEvents: mouseenter"
           animation__scale_reverse="property: scale; to: 1.5 1 1.5; dur: 200; startEvents: mouseleave"
         ></a-mixin>
         <a-mixin
           id="poster"
-          geometry="primitive: plane; width: 0.544768; height: 0.786432"
-          material="color: white; shader: flat"
+          geometry="primitive: plane; width: 0.6; height: 0.6"
+          material="shader: flat"
           position="0 0 0.005"
         ></a-mixin>
         <a-mixin
@@ -92,7 +93,7 @@
       <a-entity id="background" position="0 2.54246 -3.7666" geometry="primitive: sphere; radius: 2" material="color: red; side: back; shader: flat" scale="2.001 0.001 0.001" visible="false" class="raycastable">
       </a-entity>
       <a-entity
-        position="0 1.6 0"
+        position="0 1.6 -0.5"
         camera
         look-controls="magicWindowTrackingEnabled: false; touchEnabled: false; mouseEnabled: false"
       >
@@ -122,7 +123,7 @@
         <a-entity id="menu" highlight>
           <a-entity
             id="karigurashiButton"
-            position="-1 0 0"
+            position="-1.07 0 0"
             mixin="frame"
             class="raycastable menu-button"
             
@@ -147,7 +148,7 @@
 
           <a-entity
             id="ponyoButton"
-            position="1 0 0"
+            position="1.07 0 0"
             mixin="frame"
             class="raycastable menu-button"
           >
@@ -197,7 +198,7 @@
         </a-entity>
       </a-entity>
 
-      <a-entity position="0 2.5 -1.9" text="value: Vision Therapy VR; align: center; letterSpacing: 1.49; lineHeight: 0.19; side: double; tabSize: 4.46" scale="5 5 5"></a-entity>
+      <a-entity position="0 2.5 -1.9" text="value: Clear View VR; align: center; letterSpacing: 1.49; lineHeight: 0.19; side: double; tabSize: 4.46" scale="5 5 5"></a-entity>
     </a-scene>
   </body>
 </html>
