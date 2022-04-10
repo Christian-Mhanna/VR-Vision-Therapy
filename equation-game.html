@@ -103,6 +103,12 @@
           id="hud3"
           src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/istockphoto-1199274072-170667a.jpg?v=1649501405876"
         />
+        
+        <img
+          id="hud4"
+          src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/istockphoto-1269817139-170667a.jpg?v=1649584584012"
+        />
+        
         <audio id="success" crossorigin="anonymous" src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/success-1-6297.mp3?v=1649508543394"></audio>
       </a-assets>
 
@@ -173,15 +179,17 @@
         shadow="receive: true"
       >
       
-     <!-- Final Banner -->
+   <!-- Final Banner-->
       </a-entity>
-        <a-entity geometry="primitive: plane; width: 6; height: 4" position="0 3 -70" opacity="0" text="value: Congratulations on completing the level! \n \n Press the red button to retun to the main menu.;align: center"
-                  animation="property: material.opacity;
-                             to: 1
-                             startEvents: correct3;
-                             duration: 1500"></a-entity>
+        <a-entity id="messagePlane" geometry="primitive: plane; width: 8; height: 4" material="opacity: 0; src: #hud4; transparent: true" position="0 3 -70;" text="value: Congratulations on completing the level! \n \n Press the green button \n to retun to the main menu.;align: center; color: #df9200"
+                  animation__banner="property: components.material.material.opacity;
+                                     to: 1;
+                                     startEvents: read_message;
+                                     dur: 3500;
+                                     easing: easeInCubic"></a-entity>
         <a-cylinder position="2.39197 0.4 -66" material="" geometry="height: 2; radius: 0.17">
-      <a-cylinder id="menu-button" position="0 1 0" radius="0.15" height="0.2" color="red"></a-cylinder></a-cylinder>
+      <a-sphere id="menu-button" position="0 1 0" radius="0.18" color="green"></a-sphere>
+      </a-cylinder>
  
       <!--STEP 1-->
 
@@ -768,12 +776,14 @@
       });
       correct_box3.addEventListener("click", function () {
         var door3 = sceneEl.querySelector("#door3");
+        var messagePlane = sceneEl.querySelector("#messagePlane")
         door3.emit("correct3", null, false);
         camObj.emit("correct333", null, false);
+        messagePlane.emit("read_message",null,false);
       });
       
       function change_page(){
-  window.location.href = "main-menu.html";
+  window.location.href = "index.html";
 } 
       sceneEl.querySelector("#menu-button").addEventListener('click',change_page);
     </script>
