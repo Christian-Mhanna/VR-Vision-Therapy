@@ -1,0 +1,796 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://mixedreality.mozilla.org/ammo.js/builds/ammo.wasm.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component/dist/aframe-proxy-event-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component"></script>
+
+    <!--Warehouse texture-->
+    <script>
+      AFRAME.registerComponent("warehouseman", {
+        init: function () {
+          let el = this.el;
+          el.addEventListener("model-loaded", (e) => {
+            let warehouse3D = el.getObject3D("mesh");
+            if (!warehouse3D) {
+              return;
+            }
+            warehouse3D.traverse(function (node) {
+              if (node.isMesh) {
+                // if (node.name === 'myModelName'){
+                // node.material do stuff to your material
+                //}
+                //  console.log(node.name,  node.material);
+                //node.material.color = new THREE.Color("red");
+                node.material.map = new THREE.TextureLoader().load(
+                  "https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/Sci%20Fi.jpg?v=1648486416419"
+                );
+              }
+            });
+          });
+        },
+      });
+    </script>
+    <script>
+      AFRAME.registerComponent("modify-materials", {
+        init: function () {
+          var textureloading = new THREE.TextureLoader().load(
+            "https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/Sci%20Fi.jpg?v=1648486416419"
+          );
+          // Wait for model to load.
+          this.el.addEventListener("model-loaded", () => {
+            // Grab the mesh / scene.
+            const obj = this.el.getObject3D("mesh");
+            // Go over the submeshes and modify materials we want.
+            obj.traverse((node) => {
+              if (node.isMesh) {
+                //node.material.color.set('red');
+                node.material.map = textureloading;
+              }
+            });
+          });
+        },
+      });
+    </script>
+    <script>
+      AFRAME.registerComponent("random-number", {
+        init: function () {
+          // Set material component's color property to a random color.
+          this.el.setAttribute("text", "value", getRandomNumber());
+        },
+      });
+
+      function getRandomNumber() {
+        var number = Math.floor(Math.random() * 16);
+
+        return number;
+      }
+    </script>
+  </head>
+  <body>
+    <a-scene
+      shadow="enabled: false"
+    >
+      <a-assets>
+        <a-asset-item
+          id="warehouse"
+          src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/Warehouse.glb?v=1649509656451"
+        ></a-asset-item>
+
+        <img
+          id="scifi"
+          src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/Sci%20Fi.jpg?v=1648486416419"
+        />
+
+        <img
+          id="scifi-nm"
+          src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/Sci%20Fi%20Texture.png?v=1648486406739"
+        />
+        
+        <img
+          id="hud"
+          src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/videoblocks-4k-animation-ui-user-interface-with-world-map-data-hud-pi-bar-text-box-table-and-element-on-dark-abstract-background-for-futuristic-technology-concept_rpdw71agf_thumbnail-1080_01.png?v=1649500080885"
+        />
+
+        <img
+          id="hud2"
+          src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/istockphoto-1249935335-170667a.jpg?v=1649500901936"
+        />
+
+        <img
+          id="hud3"
+          src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/istockphoto-1199274072-170667a.jpg?v=1649501405876"
+        />
+        <audio id="success" crossorigin="anonymous" src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/success-1-6297.mp3?v=1649508543394"></audio>
+      </a-assets>
+
+      <!-- Main Settings-->
+      <a-entity
+        id="cam"
+        position="0 1.6 -1"
+        animation__1="property: position; startEvents: correct111; to: 0 1.6 -21; dur: 2000"
+        animation__2="property: position; startEvents: correct222; to: 0 1.6 -41; dur: 2000"
+        animation__3="property: position; startEvents: correct333; to: 0 1.6 -61; dur: 2000"
+      >
+        <a-entity id="camera" camera look-controls wasd-controls><a-entity
+            position="0 0 -1"
+            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+            cursor="fuse: true"
+            material="color: white; shader: flat; opacity: 0.5"
+            animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
+            animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 0.1 0.1 0.1"
+          ></a-entity
+        ></a-entity>
+      </a-entity>
+      <a-entity
+        light="type: point; intensity: 1.59; distance: 48.58; decay: 1.39; color: #fab6ee;castShadow: true; shadowBias: -0.001"
+        position="-9.79482 10 -3.48183"
+      ></a-entity>
+      <a-entity
+        light="type: point; intensity: 1.59; distance: 48.58; decay: 1.39; color: #fab6ee;castShadow: true;shadowBias: -0.001"
+        position="-9.79482 10 -30.48183"
+      ></a-entity>
+      <a-entity
+        light="type: point; intensity: 1.59; distance: 48.58; decay: 1.39; color: #fab6ee;castShadow: true;shadowBias: -0.001"
+        position="-9.79482 10 -50.48183"
+      ></a-entity>
+      <a-entity
+        light="type: point; intensity: 1.59; distance: 48.58; decay: 1.39; color: #bacaf5;castShadow: true;shadowBias: -0.001"
+        position="9.05362 10 -3.48183"
+      ></a-entity>
+      <a-entity
+        light="type: point; intensity: 1.59; distance: 48.58; decay: 1.39; color: #bacaf5;castShadow: true;shadowBias: -0.001"
+        position="9.05362 10 -30.60789"
+      ></a-entity>
+      <a-entity
+        light="type: point; intensity: 1.59; distance: 48.58; decay: 1.39; color: #bacaf5;castShadow: true;shadowBias: -0.001"
+        position="9.05362 10 -50.00067"
+      ></a-entity>
+      <a-plane
+        position="0 0 -4"
+        rotation="-90 0 0"
+        width="300"
+        height="400"
+        color="gray"
+      ></a-plane>
+      <a-sky color="#ECECEC"></a-sky>
+  <!--a-sound src="#success" autoplay="true" position="0 2 5" loop="true"></a-sound-->
+      
+      <!--Warehouse-->
+ <a-entity
+        gltf-model="#warehouse"
+        src="#scifi"
+        repeat="100 100"
+        normal-map="#scifi-nm"
+        normal-texture-repeat="100 100"
+        roughness="0.5"
+        position="-12.364 0 -100"
+        scale="2 2 2"
+        rotation="0 0 0"
+        modify-materials
+        shadow="receive: true"
+      >
+      
+     <!-- Final Banner -->
+      </a-entity>
+        <a-entity geometry="primitive: plane; width: 6; height: 4" position="0 3 -70" opacity="0" text="value: Congratulations on completing the level! \n \n Press the red button to retun to the main menu.;align: center"
+                  animation="property: material.opacity;
+                             to: 1
+                             startEvents: correct3;
+                             duration: 1500"></a-entity>
+        <a-cylinder position="2.39197 0.4 -66" material="" geometry="height: 2; radius: 0.17">
+      <a-cylinder id="menu-button" position="0 1 0" radius="0.15" height="0.2" color="red"></a-cylinder></a-cylinder>
+ 
+      <!--STEP 1-->
+
+      <a-entity>
+        <!--Door1-->
+
+        <a-plane
+          id="door1"
+          position="0 6 -20"
+          width="30"
+          height="20"
+          color="black"
+          side="double"
+          animation="property: position;
+                                    startEvents: correct1; 
+                                    dur: 1500; 
+                                    to: 0 -10 -20"
+          sound="src: #success; on: correct1; positional: false"
+          
+        >
+        </a-plane>
+
+        <!--Door2-->
+        <a-plane
+          id="door2"
+          position="0 6 -40"
+          width="30"
+          height="20"
+          color="black"
+          side="double"
+          animation="property: position;
+                                    startEvents: correct2; 
+                                    dur: 1500; 
+                                    to: 0 -10 -40"
+          sound="src: #success; on: correct2; positional: false"
+        >
+        </a-plane>
+
+        <!--Door3-->
+        <a-plane
+          id="door3"
+          position="0 6 -60"
+          width="30"
+          height="20"
+          color="black"
+          side="double"
+          animation="property: position;
+                                    startEvents: correct3; 
+                                    dur: 1500; 
+                                    to: 0 -10 -60"
+          sound="src: #success; on: correct3; positional: false"
+        >
+        </a-plane>
+        
+       <!--Screen-->
+
+        <a-plane
+          src="#hud"
+          position="-0.11 6 -8"
+          width="4"
+          height="2"
+          color="white"
+          side="double"
+        >
+          <a-text
+            id="text1"
+            value="Hello"
+            align="center"
+            width="10"
+            color="#d9d9d9"
+          ></a-text>
+        </a-plane>
+
+        <a-box
+          repeat=" 1 1"
+          id="box1"
+          shadow="receive: true;cast: true"
+          position="-1.5 1.5 -8"
+          width="1"
+          depth="1"
+          height="1"
+          color="black"
+          animation="property: position; 
+                           to: -1.5 1.5 -18; 
+                           dur: 4000;
+                           dir: alternate;
+                           easing: linear; 
+                           loop: true"
+        >
+          <a-text
+            id="1"
+            position="0 0 0.501"
+            value=""
+            align="center"
+            width="7"
+            color="#d9d9d9"
+          ></a-text>
+        </a-box>
+
+        <a-box
+          id="box2"
+          position="1.5 1.5 -8"
+          shadow="receive: true;cast: true"
+          width="1"
+          depth="1"
+          height="1"
+          color="black"
+          animation="property: position; 
+                           to: 1.5 1.5 -18; 
+                           dur: 4000;
+                           dir: alternate;
+                           easing: linear; 
+                           loop: true"
+        >
+          <a-text
+            id="2"
+            position="0 0 0.501"
+            value=""
+            align="center"
+            width="7"
+            color="#d9d9d9"
+          ></a-text>
+        </a-box>
+
+        <a-box
+          id="box3"
+          position="4 1.5 -8"
+          shadow="receive: true;cast: true"
+          width="1"
+          depth="1"
+          height="1"
+          color="black"
+          animation="property: position; 
+                           to: 4 1.5 -18; 
+                           dur: 4000;
+                           dir: alternate;
+                           easing: linear; 
+                           loop: true"
+        >
+          <a-text
+            id="3"
+            position="0 0 0.501"
+            value=""
+            align="center"
+            width="7"
+            color="#d9d9d9"
+          ></a-text>
+        </a-box>
+
+        <a-box
+          id="box4"
+          position="-4 1.5 -8"
+          shadow="receive: true;cast: true"
+          width="1"
+          depth="1"
+          height="1"
+          color="black"
+          animation="property: position; 
+                           to: -4 1.5 -18; 
+                           dur: 4000;
+                           dir: alternate;
+                           easing: linear; 
+                           loop: true"
+        >
+          <a-text
+            id="4"
+            position="0 0 0.501"
+            value=""
+            align="center"
+            width="7"
+            color="#d9d9d9"
+          ></a-text>
+        </a-box>
+      </a-entity>
+
+      <!--STEP 2-->
+
+      <a-entity position="0 0 -20">
+        <!--Screen-->
+
+        <a-plane
+          src="#hud2"
+          position="-0.12 6 -8"
+          width="4"
+          height="2"
+          color="white"
+          side="double"
+        >
+          <a-text
+            id="text2"
+            value="Hello"
+            width="10"
+            color="#186fcc"
+            align="center"
+          ></a-text>
+        </a-plane>
+
+        <a-box
+          id="box5"
+          position="-1.5 1.5 -8"
+          shadow="receive: true;cast: true"
+          width="0.6"
+          depth="0.6"
+          height="0.6"
+          color="#000052"
+          animation="property: position; 
+                           to: -1.5 1.5 -18; 
+                           dur: 4000;
+                           dir: alternate;
+                           easing: linear; 
+                           loop: true"
+        >
+          <a-text
+            id="5"
+            position="0 0 0.351"
+            value=""
+            align="center"
+            width="7"
+            color="#186fcc"
+          ></a-text>
+        </a-box>
+
+        <a-box
+          id="box6"
+          position="1.5 1.5 -8"
+          shadow="receive: true;cast: true"
+          width="0.6"
+          depth="0.6"
+          height="0.6"
+          color="#000052"
+          animation="property: position; 
+                           to: 1.5 1.5 -18; 
+                           dur: 4000;
+                           dir: alternate;
+                           easing: linear; 
+                           loop: true"
+        >
+          <a-text
+            id="6"
+            position="0 0 0.351"
+            value=""
+            align="center"
+            width="7"
+            color="#1882c1"
+          ></a-text>
+        </a-box>
+
+        <a-box
+          id="box7"
+          position="4 1.5 -8"
+          shadow="receive: true;cast: true"
+          width="0.6"
+          depth="0.6"
+          height="0.6"
+          color="#000052"
+          animation="property: position; 
+                           to: 4 1.5 -18; 
+                           dur: 4000;
+                           dir: alternate;
+                           easing: linear; 
+                           loop: true"
+        >
+          <a-text
+            id="7"
+            position="0 0 0.351"
+            value=""
+            align="center"
+            width="7"
+            color="#1882c1"
+          ></a-text>
+        </a-box>
+
+        <a-box
+          id="box8"
+          position="-4 1.5 -8"
+          shadow="receive: true;cast: true"
+          width="0.6"
+          depth="0.6"
+          height="0.6"
+          color="#000052"
+          animation="property: position; 
+                           to: -4 1.5 -18; 
+                           dur: 4000;
+                           dir: alternate;
+                           easing: linear; 
+                           loop: true"
+        >
+          <a-text
+            id="8"
+            position="0 0 0.351"
+            value=""
+            align="center"
+            width="7"
+            color="#1882c1"
+          ></a-text>
+        </a-box>
+      </a-entity>
+
+      <!--STEP 3-->
+
+      <a-entity position="0 0 -40">
+        <!--Screen-->
+        <a-plane
+          src="#hud3"
+          position="-0.12 6 -8"
+          width="4"
+          height="2"
+          color="white"
+          side="double"
+        >
+          <a-text
+            id="text3"
+            value="Hello"
+            align="center"
+            width="10"
+            color="#cca838"
+          ></a-text>
+        </a-plane>
+
+        <a-box
+          id="box9"
+          position="-1.5 1.5 -12"
+          shadow="receive: true;cast: true"
+          width="0.6"
+          depth="0.6"
+          height="0.6"
+          color="#ac0028"
+          animation="property: position; 
+                           to: -1.5 5.5 -12; 
+                           dur: 2000;
+                           dir: alternate;
+                           easing: linear; 
+                           loop: true"
+        >
+          <a-text
+            id="9"
+            position="0 0 0.31"
+            value=""
+            align="center"
+            width="7"
+            color="#cca838"
+          ></a-text>
+        </a-box>
+
+        <a-box
+          id="box10"
+          position="1.5 1.5 -12"
+          shadow="receive: true;cast: true"
+          width="0.6"
+          depth="0.6"
+          height="0.6"
+          color="#ac0028"
+          animation="property: position; 
+                           to: 1.5 5.5 -12; 
+                           dur: 2000;
+                           dir: alternate;
+                           easing: linear; 
+                           loop: true"
+        >
+          <a-text
+            id="10"
+            position="0 0 0.31"
+            value=""
+            align="center"
+            width="7"
+            color="#cca838"
+          ></a-text>
+        </a-box>
+
+        <a-box
+          id="box11"
+          position="4 1.5 -12"
+          shadow="receive: true;cast: true"
+          width="0.6"
+          depth="0.6"
+          height="0.6"
+          color="#ac0028"
+          animation="property: position; 
+                           to: 4 5.5 -12; 
+                           dur: 2000;
+                           dir: alternate;
+                           easing: linear; 
+                           loop: true"
+        >
+          <a-text
+            id="11"
+            position="0 0 0.31"
+            value=""
+            align="center"
+            width="7"
+            color="#cca838"
+          ></a-text>
+        </a-box>
+
+        <a-box
+          id="box12"
+          position="-4 1.5 -12"
+          shadow="receive: true;cast: true"
+          width="0.6"
+          depth="0.6"
+          height="0.6"
+          color="#ac0028"
+          animation="property: position; 
+                           to: -4 5.5 -12; 
+                           dur: 2000;
+                           dir: alternate;
+                           easing: linear; 
+                           loop: true"
+        >
+          <a-text
+            id="12"
+            position="0 0 0.31"
+            value=""
+            align="center"
+            width="7"
+            color="#cca838"
+          ></a-text>
+        </a-box>
+      </a-entity>
+    </a-scene>
+
+    <script>
+      //var result = [0, 0];
+      //var counter = 0;
+
+      var TreeNode = function (left, right, operator) {
+        this.left = left;
+        this.right = right;
+        this.operator = operator;
+        var result = 0;
+        var counter = 0;
+
+        // result[0] = left;
+
+        if (counter == 0) {
+          switch (operator) {
+            case "/":
+              result = left / right;
+              break;
+            case "*":
+              result = left * right;
+              break;
+            case "+":
+              result = left + right;
+              break;
+            case "-":
+              result = left - right;
+              break;
+          }
+        } //else {
+        //switch (operator) {
+        //  case "/":
+        //    result[1] = left / result[0];
+        //    break;
+        //  case "*":
+        //    result[1] = left * result[0];
+        //    break;
+        //  case "+":
+        //    result[1] = left + result[0];
+        //    break;
+        //  case "-":
+        //    result[1] = left - result[0];
+        //    break;
+        //}
+        //}
+        counter++;
+
+        this.toString = function () {
+          return ["(" + left + " " + operator + " " + right + ")", result];
+        };
+      };
+
+      function randomNumberRange(min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+      }
+
+      var x = ["/", "*", "-", "+"];
+
+      function buildTree(numNodes) {
+        if (numNodes === 1) return randomNumberRange(1, 10);
+
+        var numLeft = Math.floor(numNodes / 2);
+        var leftSubTree = buildTree(numLeft);
+        var numRight = Math.ceil(numNodes / 2);
+        var rightSubTree = buildTree(numRight);
+
+        var m = randomNumberRange(0, x.length);
+        var str = x[m];
+        return new TreeNode(leftSubTree, rightSubTree, str);
+      }
+
+      var input = "level 2";
+      input = input.split(" ");
+      var n = Number(input[1]);
+
+      var result1 = buildTree(n).toString();
+      var result2 = buildTree(n).toString();
+      var result3 = buildTree(n).toString();
+
+      document.getElementById("text1").setAttribute("value", result1[0]);
+      document.getElementById("text2").setAttribute("value", result2[0]);
+      document.getElementById("text3").setAttribute("value", result3[0]);
+
+      var random_id1 = Math.floor(Math.random() * 4 + 1);
+      var random_id2 = Math.floor(Math.random() * 4 + 5);
+      var random_id3 = Math.floor(Math.random() * 4 + 9);
+
+      document
+        .getElementById("" + 1)
+        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+      document
+        .getElementById("" + 2)
+        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+      document
+        .getElementById("" + 3)
+        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+      document
+        .getElementById("" + 4)
+        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+      document
+        .getElementById("" + 5)
+        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+      document
+        .getElementById("" + 6)
+        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+      document
+        .getElementById("" + 7)
+        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+      document
+        .getElementById("" + 8)
+        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+      document
+        .getElementById("" + 9)
+        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+      document
+        .getElementById("" + 10)
+        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+      document
+        .getElementById("" + 11)
+        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+      document
+        .getElementById("" + 12)
+        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+      document
+        .getElementById("" + random_id1)
+        .setAttribute("value", result1[1]);
+      document
+        .getElementById("" + random_id2)
+        .setAttribute("value", result2[1]);
+      document
+        .getElementById("" + random_id3)
+        .setAttribute("value", result3[1]);
+      var sceneEl = document.querySelector("a-scene");
+      var camObj = sceneEl.querySelector("#cam");
+      var correct_box1 = sceneEl.querySelector("#box" + random_id1);
+      var correct_box2 = sceneEl.querySelector("#box" + random_id2);
+      var correct_box3 = sceneEl.querySelector("#box" + random_id3);
+
+      //for (let i = 1; i < 4; i++) {
+      //  if ((i = random_id1)) {
+      //    continue;
+      //  } else {
+      //    document.getElementById("i").setAttribute("value", "Test");
+      //  }
+      //}
+
+      //var door1 = sceneEl.querySelector("#door1");
+      //var door2 = sceneEl.querySelector("#door2");
+      //var door3 = sceneEl.querySelector("#door3");
+
+      var colorvar = "red";
+
+      correct_box1.addEventListener("click", function () {
+        //door1.setAttribute("position", { x: 0, y: 10, z: 0 });
+        //door1.setAttribite('animation','property: position; to: -2 1 -4');
+        var door1 = sceneEl.querySelector("#door1");
+        door1.emit("correct1", null, false);
+        camObj.emit("correct111", null, false);
+      });
+      correct_box2.addEventListener("click", function () {
+        var door2 = sceneEl.querySelector("#door2");
+        door2.emit("correct2", null, false);
+        camObj.emit("correct222", null, false);
+      });
+      correct_box3.addEventListener("click", function () {
+        var door3 = sceneEl.querySelector("#door3");
+        door3.emit("correct3", null, false);
+        camObj.emit("correct333", null, false);
+      });
+      
+      function change_page(){
+  window.location.href = "main-menu.html";
+} 
+      sceneEl.querySelector("#menu-button").addEventListener('click',change_page);
+    </script>
+    
+    <!--Color Generator-->
+    <script>
+      function generateRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+var randomColor=generateRandomColor(); //"#F10531"
+    </script>
+    
+  </body>
+</html>
