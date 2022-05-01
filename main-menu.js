@@ -11,22 +11,22 @@ AFRAME.registerComponent('info-panel', {
 
     this.movieInfo = {
       karigurashiButton: {
-        title: 'Strabismus',
+        title: 'Sci Fi Equations',
         imgEl: document.querySelector('#karigurashiMovieImage'),
-        description: 'Strabismus (crossed eyes) is a condition in which the eyes do not line up with one another. In other words, one eye is turned in a direction that is different from the other eye. In this exercise, we will be providing a therapeutic training to the muscles of lazy eye by hiding objects from the good eye',
+        description: 'Strabismus (crossed eyes) is a condition in which the eyes do not line up with one another. During this game the user will be challenged to solve equations and choose the correct answer by gazing on moving objects. This game can contribute to enhacing the visual condition of the patient by merging both brain and eye focus. Addtionally, objects will be hidden from the good eye to insure reliance on the lazy eye.',
         siteURL: 'equation-game.html'
       },
       kazetachinuButton: {
-        title: 'Lazy Eye',
+        title: 'Color Match',
         imgEl: document.querySelector('#kazetachinuMovieImage'),
-        description: 'A "lazy eye" is a childhood condition where the vision does not develop properly. It\'s known medically as amblyopia.It happens because one or both eyes are unable to build a strong link to the brain. It usually only affects one eye, and means that the child can see less clearly out of the affected eye and relies more on the "good" eye. It\'s estimated that 1 in 50 children develop a lazy eye.',
-        siteURL: 'index.html'
+        description: 'Strabismus can also affect color perception in the lazy eye where the latter is unable to differenciate between different shades of the same color. In this exercise, we will task the patient to match colors together in order to strangthen his color perception.',
+        siteURL: 'color-perception.html'
       },
       ponyoButton: {
-        title: 'Color Perception',
+        title: 'Depth Percetion',
         imgEl: document.querySelector('#ponyoMovieImage'),
-        description: 'Color Perception is the ability to discriminate between colors. This skill is important for accurate interpretation of color-coded materials (such as charts and graphs).',
-        siteURL: 'equation-game.html'
+        description: 'Strabismus can affect the depth perception, meaning the patient mugh be unable to perceive details and loose visual information as we go farther in depth. The purpose of this game is to train the eye on perceiving such in formation by letting the patient determine the position of objects in terms of depth and ditingushing differences between objects far away from him.',
+        siteURL: 'depth-game.html'
       }
     };
 
