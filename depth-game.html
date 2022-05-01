@@ -1,0 +1,744 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://mixedreality.mozilla.org/ammo.js/builds/ammo.wasm.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component/dist/aframe-proxy-event-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <img
+          id="sky"
+          src="https://cdn.glitch.global/5c5b9e03-fef9-44bc-8e86-29a77d8a4fd1/Nature.jpeg?v=1649513422915"
+        />
+        
+        <img
+          id="exit"
+          src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/Exit.png?v=1650823305842"
+        />
+
+        <img
+          id="celebration"
+          src="https://cdn.glitch.global/5c5b9e03-fef9-44bc-8e86-29a77d8a4fd1/celebration.jpg?v=1650123140866"
+        />
+
+        <img
+          id="pattern1"
+          src="https://cdn.glitch.global/ebb1e27a-67a8-494b-837f-0e2820c99f79/Pattern%201.jpg?v=1650742018339"
+        />
+
+        <img
+          id="pattern2"
+          src="https://cdn.glitch.global/ebb1e27a-67a8-494b-837f-0e2820c99f79/Pattern%202.jpg?v=1650742527529"
+        />
+
+        <img
+          id="pattern-nm1"
+          src="https://cdn.glitch.global/ebb1e27a-67a8-494b-837f-0e2820c99f79/Pattern%20NM%201.png?v=1650786468966"
+        />
+
+        <img
+          id="pattern-nm2"
+          src="https://cdn.glitch.global/ebb1e27a-67a8-494b-837f-0e2820c99f79/Pattern%20NM%202.png?v=1650786469103"
+        />
+
+        <audio
+          id="success"
+          crossorigin="anonymous"
+          src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/success-1-6297.mp3?v=1649508543394"
+        ></audio>
+
+        <audio
+          id="wrong"
+          crossorigin="anonymous"
+          src="https://cdn.glitch.global/5c5b9e03-fef9-44bc-8e86-29a77d8a4fd1/fail.mp4?v=1650128788601"
+        ></audio>
+
+        <a-asset-item
+          id="balloon"
+          src="https://cdn.glitch.global/5c5b9e03-fef9-44bc-8e86-29a77d8a4fd1/scene.gltf.glb?v=1649516283551"
+        ></a-asset-item>
+      </a-assets>
+
+      <a-camera position="0 1.6 0" rotation="0 0 0"
+        ><a-entity
+          position="0 0 -1"
+          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+          cursor="fuse: true; fuseTimeout: 3000"
+          material="color: black; shader: flat; opacity: 0.5"
+          animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
+          animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 3000; from: 1 1 1; to: 0.1 0.1 0.1"
+        >
+        </a-entity>
+      </a-camera>
+      <a-plane
+        id="menu-button"
+        position="-7 -15 -16"
+        height="2"
+        width="2"
+        src="#exit"             
+               animation__o="property: position;
+                                    startEvents: change3; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: -7 11 -16"
+      ></a-plane>
+      <!--Balloon-->
+
+      <a-entity
+        gltf-model="#balloon"
+        scale="10 10 10"
+        position="-1.58 -1 -0.3"
+        rotation="0 -11.65 -1.3"
+      >
+      </a-entity>
+
+      <a-sky src="#sky" rotation="0 90 0"></a-sky>
+
+      <!--Ball 11-->
+
+      <a-sphere
+        transparent="true"
+        opacity="0"
+        id="color11"
+        position="-20 10 -100"
+        radius="2"
+        color="#09477e"
+        proxy-event="event: click; to: #screen; as: wrong"
+        animation__p="property: position;
+                                    startEvents: change; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: -20 1000 -100"
+        animation__o="property: material.opacity;
+                                    startEvents: change; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0"
+      >
+        <a-sphere radius="1.8" color="#09477e" stereo="eye: left"></a-sphere>
+      </a-sphere>
+
+      <!--Ball 12-->
+
+      <a-sphere
+        transparent="true"
+        opacity="0"
+        id="color12"
+        position="0 10 -110"
+        radius="2"
+        color="#09477e"
+        proxy-event="event: click; to: #screen; as: wrong"
+        animation__p="property: position;
+                                    startEvents: change; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0 1000 -110"
+        animation__o="property: material.opacity;
+                                    startEvents: change; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0"
+      >
+        <a-sphere radius="1.8" color="#09477e" stereo="eye: left"></a-sphere>
+      </a-sphere>
+
+      <!--Ball 13-->
+
+      <a-sphere
+        transparent="true"
+        opacity="0"
+        id="color13"
+        position="20 10 -90"
+        radius="2"
+        color="#09477e"
+        proxy-event="event: click; to: #screen; as: wrong"
+        animation__p="property: position;
+                                    startEvents: change; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 20 1000 -90"
+        animation__o="property: material.opacity;
+                                    startEvents: change; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0"
+      >
+        <a-sphere radius="1.8" color="#09477e" stereo="eye: left"></a-sphere>
+      </a-sphere>
+
+      <!--Ball 14-->
+
+      <a-sphere
+        transparent="true"
+        opacity="0"
+        id="color14"
+        position="-15 0 -150"
+        radius="2"
+        color="#09477e"
+        proxy-event__11="event: click; to: #color11; as: change"
+        proxy-event__12="event: click; to: #color12; as: change"
+        proxy-event__13="event: click; to: #color13; as: change"
+        proxy-event__14="event: click; to: #color14; as: change"
+        proxy-event__15="event: click; to: #color15; as: change"
+        proxy-event__16="event: click; to: #color16; as: change"
+        proxy-event__17="event: click; to: #ref; as: change"
+        proxy-event__18="event: click; to: #screen; as: change"
+        proxy-event__21="event: click; to: #color21; as: change"
+        proxy-event__22="event: click; to: #color22; as: change"
+        proxy-event__23="event: click; to: #color23; as: change"
+        proxy-event__24="event: click; to: #color24; as: change"
+        proxy-event__25="event: click; to: #color25; as: change"
+        proxy-event__26="event: click; to: #color26; as: change"
+        proxy-event__27="event: click; to: #ref; as: change"
+        proxy-event__28="event: click; to: #screen; as: change"
+        animation__p="property: position;
+                                    startEvents: change; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: -15 1000 -140"
+        animation__o="property: material.opacity;
+                                    startEvents: change; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0"
+      >
+        <a-sphere radius="1.8" color="#09477e" stereo="eye: left"></a-sphere>
+      </a-sphere>
+
+      <!--Ball 15-->
+
+      <a-sphere
+        transparent="true"
+        opacity="0"
+        id="color15"
+        position="0 0 -130"
+        radius="2"
+        color="#09477e"
+        proxy-event="event: click; to: #screen; as: wrong"
+        animation__p="property: position;
+                                    startEvents: change; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0 1000 -130"
+        animation__o="property: material.opacity;
+                                    startEvents: change; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0"
+      >
+        <a-sphere radius="1.8" color="#09477e" stereo="eye: left"></a-sphere>
+      </a-sphere>
+
+      <!--Ball 16-->
+
+      <a-sphere
+        transparent="true"
+        opacity="0"
+        id="color16"
+        position="15 0 -140"
+        radius="2"
+        color="#09477e"
+        proxy-event="event: click; to: #screen; as: wrong"
+        animation__p1="property: position;
+                                    startEvents: change; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 15 1000 -140"
+        animation__o1="property: material.opacity;
+                                    startEvents: change; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0"
+      >
+        <a-sphere radius="1.8" color="#09477e" stereo="eye: left"></a-sphere>
+      </a-sphere>
+
+      <!--Ball 21-->
+
+      <a-sphere
+        transparent="true"
+        opacity="0"
+        id="color21"
+        position="-20 -100 -140"
+        radius="2"
+        color="#893c3c"
+        proxy-event="event: click; to: #screen; as: wrong"
+        animation__pf="property: position;
+                                    startEvents: change; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: -20 10 -140"
+        animation__p="property: position;
+                                    startEvents: change2; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: -20 1000 -140"
+        animation__o="property: material.opacity;
+                                    startEvents: change2; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0"
+      >
+        <a-sphere radius="1.8" color="#893c3c" stereo="eye: left"></a-sphere>
+      </a-sphere>
+
+      <!--Ball 22-->
+
+      <a-sphere
+        transparent="true"
+        opacity="0"
+        id="color22"
+        position="0 -100 -140"
+        radius="2"
+        color="#893c3c"
+        proxy-event="event: click; to: #screen; as: wrong"
+        animation__pf="property: position;
+                                    startEvents: change; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0 10 -140"
+        animation__p="property: position;
+                                    startEvents: change2; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0 1000 -140"
+        animation__o="property: material.opacity;
+                                    startEvents: change2; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0"
+      >
+        <a-sphere radius="1.8" color="#893c3c" stereo="eye: left"></a-sphere>
+      </a-sphere>
+
+      <!--Ball 23-->
+
+      <a-sphere
+        transparent="true"
+        opacity="0"
+        id="color23"
+        position="20 -100 -140"
+        radius="2"
+        color="#893c3c"
+        proxy-event="event: click; to: #screen; as: wrong"
+        animation__pf="property: position;
+                                    startEvents: change; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 20 10 -140"
+        animation__p="property: position;
+                                    startEvents: change2; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 20 1000 -140"
+        animation__o="property: material.opacity;
+                                    startEvents: change2; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0"
+      >
+        <a-sphere radius="1.8" color="#893c3c" stereo="eye: left"></a-sphere>
+      </a-sphere>
+
+      <!--Ball 24-->
+
+      <a-sphere
+        transparent="true"
+        opacity="0"
+        id="color24"
+        position="-20 -107 -140"
+        radius="2"
+        color="#893c3c"
+        proxy-event="event: click; to: #screen; as: wrong"
+        animation__pf="property: position;
+                                    startEvents: change; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: -20 0 -140"
+        animation__p="property: position;
+                                    startEvents: change2; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: -20 1000 -140"
+        animation__o="property: material.opacity;
+                                    startEvents: change2; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0"
+      >
+        <a-sphere radius="1.8" color="#893c3c" stereo="eye: left"></a-sphere>
+      </a-sphere>
+
+      <!--Ball 25-->
+
+      <a-dodecahedron
+        transparent="true"
+        opacity="0"
+        id="color25"
+        rotation="0 45 0"
+        position="0 -107 -140"
+        radius="2"
+        color="#893c3c"
+        proxy-event__21="event: click; to: #color21; as: change2"
+        proxy-event__22="event: click; to: #color22; as: change2"
+        proxy-event__23="event: click; to: #color23; as: change2"
+        proxy-event__24="event: click; to: #color24; as: change2"
+        proxy-event__25="event: click; to: #color25; as: change2"
+        proxy-event__26="event: click; to: #color26; as: change2"
+        proxy-event__27="event: click; to: #ref; as: change2"
+        proxy-event__28="event: click; to: #screen; as: change2"
+        proxy-event__31="event: click; to: #color31; as: change2"
+        proxy-event__32="event: click; to: #color32; as: change2"
+        proxy-event__33="event: click; to: #color33; as: change2"
+        proxy-event__34="event: click; to: #color34; as: change2"
+        proxy-event__35="event: click; to: #color35; as: change2"
+        proxy-event__36="event: click; to: #color36; as: change2"
+        proxy-event__37="event: click; to: #ref; as: change2"
+        proxy-event__38="event: click; to: #screen; as: change2"
+        animation__pf="property: position;
+                                    startEvents: change; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0 0 -140"
+        animation__p="property: position;
+                                    startEvents: change2; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0 1000 -140"
+        animation__o="property: material.opacity;
+                                    startEvents: change2; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0"
+      >
+        <a-dodecahedron
+          radius="1.8"
+          color="#893c3c"
+          stereo="eye: left"
+        ></a-dodecahedron>
+      </a-dodecahedron>
+
+      <!--Ball 26-->
+
+      <a-sphere
+        transparent="true"
+        opacity="0"
+        id="color26"
+        position="20 -107 -140"
+        radius="2"
+        color="#893c3c"
+        proxy-event="event: click; to: #screen; as: wrong"
+        animation__pf="property: position;
+                                    startEvents: change; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 20 0 -140"
+        animation__p="property: position;
+                                    startEvents: change2; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 20 1000 -140"
+        animation__o="property: material.opacity;
+                                    startEvents: change32; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0"
+      >
+        <a-sphere radius="1.8" color="#893c3c" stereo="eye: left"></a-sphere>
+      </a-sphere>
+
+      <!--Ball 31-->
+      <a-sphere
+        transparent="true"
+        opacity="0"
+        radius="1.8"
+        color="#893c3c"
+        stereo="eye: left"
+      >
+        <a-sphere
+          id="color31"
+          position="-20 -100 -90"
+          radius="2"
+          src="#pattern1"
+          normal-map="#pattern-nm1"
+          roughness="0.5"
+          proxy-event="event: click; to: #screen; as: wrong"
+          animation__pf="property: position;
+                                    startEvents: change2; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: -20 10 -90"
+          animation__p="property: position;
+                                    startEvents: change3; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: -20 1000 -90"
+          animation__o="property: material.opacity;
+                                    startEvents: change3; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0"
+        >
+          <a-sphere
+            transparent="true"
+            opacity="0"
+            radius="2.1"
+            color="#893c3c"
+            stereo="eye: left"
+          ></a-sphere>
+        </a-sphere>
+      </a-sphere>
+
+      <!--Ball 32-->
+      <a-sphere
+        transparent="true"
+        opacity="0"
+        radius="1.8"
+        color="#893c3c"
+        stereo="eye: left"
+      >
+        <a-sphere
+          id="color32"
+          position="0 -100 -90"
+          radius="2"
+          src="#pattern1"
+          normal-map="#pattern-nm1"
+          roughness="0.5"
+          proxy-event="event: click; to: #screen; as: wrong"
+          animation__pf="property: position;
+                                    startEvents: change2; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0 10 -90"
+          animation__p="property: position;
+                                    startEvents: change3; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0 1000 -90"
+          animation__o="property: material.opacity;
+                                    startEvents: change3; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0"
+        >
+        </a-sphere>
+      </a-sphere>
+
+      <!--Ball 33-->
+      <a-sphere
+        transparent="true"
+        opacity="0"
+        radius="1.8"
+        color="#893c3c"
+        stereo="eye: left"
+      >
+        <a-sphere
+          id="color33"
+          position="20 -100 -90"
+          radius="2"
+          src="#pattern2"
+          normal-map="#pattern-nm2"
+          roughness="0.5"
+          proxy-event__31="event: click; to: #color31; as: change3"
+          proxy-event__32="event: click; to: #color32; as: change3"
+          proxy-event__33="event: click; to: #color33; as: change3"
+          proxy-event__34="event: click; to: #color34; as: change3"
+          proxy-event__35="event: click; to: #color35; as: change3"
+          proxy-event__36="event: click; to: #color36; as: change3"
+          proxy-event__37="event: click; to: #ref; as: change3"
+          proxy-event__38="event: click; to: #screen; as: change3"
+          proxy-event__s="event: click; to: #screen2; as: change3"
+          proxy-event__m="event: click; to: #menu-button; as: change3"
+                 
+          animation__pf="property: position;
+                                    startEvents: change2; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 20 10 -90"
+          animation__p="property: position;
+                                    startEvents: change3; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 20 1000 -90"
+          animation__o="property: material.opacity;
+                                    startEvents: change3; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0"
+        >
+        </a-sphere>
+      </a-sphere>
+
+      <!--Ball 34-->
+      <a-sphere
+        transparent="true"
+        opacity="0"
+        radius="1.8"
+        color="#893c3c"
+        stereo="eye: left"
+      >
+        <a-sphere
+          id="color34"
+          position="-20 -107 -90"
+          radius="2"
+          src="#pattern1"
+          normal-map="#pattern-nm1"
+          roughness="0.5"
+          proxy-event="event: click; to: #screen; as: wrong"
+          animation__pf="property: position;
+                                    startEvents: change2; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: -20 0 -90"
+          animation__p="property: position;
+                                    startEvents: change3; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: -20 1000 -90"
+          animation__o="property: material.opacity;
+                                    startEvents: change3; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0"
+        >
+        </a-sphere>
+      </a-sphere>
+
+      <!--Ball 35-->
+      <a-sphere
+        transparent="true"
+        opacity="0"
+        radius="1.8"
+        color="#893c3c"
+        stereo="eye: left"
+      >
+        <a-sphere
+          id="color35"
+          position="0 -107 -90"
+          radius="2"
+          src="#pattern1"
+          normal-map="#pattern-nm1"
+          roughness="0.5"
+          proxy-event="event: click; to: #screen; as: wrong"
+          animation__pf="property: position;
+                                    startEvents: change2; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0 0 -90"
+          animation__p="property: position;
+                                    startEvents: change3; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0 1000 -90"
+          animation__o="property: material.opacity;
+                                    startEvents: change3; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0"
+        >
+        </a-sphere
+      ></a-sphere>
+
+      <!--Ball 36-->
+
+      <a-sphere
+        transparent="true"
+        opacity="0"
+        radius="1.8"
+        color="#893c3c"
+        stereo="eye: left"
+      >
+        <a-sphere
+          id="color36"
+          position="20 -107 -90"
+          radius="2"
+          src="#pattern1"
+          normal-map="#pattern-nm1"
+          roughness="0.5"
+          proxy-event="event: click; to: #screen; as: wrong"
+          animation__pf="property: position;
+                                    startEvents: change2; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 20 0 -90"
+          animation__p="property: position;
+                                    startEvents: change3; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 20 1000 -90"
+          animation__o="property: material.opacity;
+                                    startEvents: change3; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0"
+        >
+        </a-sphere>
+      </a-sphere>
+
+      <!--Instructions-->
+
+      <a-plane
+        id="screen"
+        position="0 11 -16"
+        side="double"
+        width="8"
+        height="2"
+        rotation="0 0 0"
+        color="white"
+        text="value: Choose the sphere that is \n the farthest away ;align: center; position: 0 0 -10; color:#000000; width:11"
+        animation__1="property: text.value;
+                                    startEvents: change; 
+                                    easing: easeInCubic; 
+                                    dur: 150; 
+                                    to: Select the dodecahedron"
+        animation__2="property: text.value;
+                                    startEvents: change2; 
+                                    easing: easeInCubic; 
+                                    dur: 150; 
+                                    to: Select the balloon with an \n interrupted pattern"
+        animation__3="property: text.value;
+                                    startEvents: change3; 
+                                    easing: easeInCubic; 
+                                    dur: 150; 
+                                    to: Congratulations, \n you completed the game !!"
+        sound__1="src: #success; on: change"
+        sound__2="src: #success; on: change2"
+        sound__3="src: #success; on: change3"
+        sound__4="src: #wrong; on: wrong"
+      >
+      </a-plane>
+
+      <!--Pop up-->
+
+      <a-plane
+        id="screen2"
+        src="#celebration"
+        position="0 -15 -13"
+        side="double"
+        width="20"
+        height="12"
+        rotation="0 0 0"
+        color="white"
+        animation="property: position;
+                                    startEvents: change3; 
+                                    easing: easeInCubic; 
+                                    dur: 1500; 
+                                    to: 0 1.5 -13"
+      >
+      </a-plane>
+    </a-scene>
+    <script>
+      function change_page() {
+        window.location.href = "index.html";
+      }
+      var sceneEl = document.querySelector("a-scene");
+      sceneEl
+        .querySelector("#menu-button")
+        .addEventListener("click", change_page);
+    </script>
+  </body>
+</html>
