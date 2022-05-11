@@ -71,9 +71,7 @@
     </script>
   </head>
   <body>
-    <a-scene
-      shadow="enabled: false"
-    >
+    <a-scene shadow="enabled: false">
       <a-assets>
         <a-asset-item
           id="warehouse"
@@ -89,7 +87,7 @@
           id="scifi-nm"
           src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/Sci%20Fi%20Texture.png?v=1648486406739"
         />
-        
+
         <img
           id="hud"
           src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/videoblocks-4k-animation-ui-user-interface-with-world-map-data-hud-pi-bar-text-box-table-and-element-on-dark-abstract-background-for-futuristic-technology-concept_rpdw71agf_thumbnail-1080_01.png?v=1649500080885"
@@ -104,13 +102,17 @@
           id="hud3"
           src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/istockphoto-1199274072-170667a.jpg?v=1649501405876"
         />
-        
+
         <img
           id="hud4"
           src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/istockphoto-1269817139-170667a.jpg?v=1649584584012"
         />
-        
-        <audio id="success" crossorigin="anonymous" src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/success-1-6297.mp3?v=1649508543394"></audio>
+
+        <audio
+          id="success"
+          crossorigin="anonymous"
+          src="https://cdn.glitch.global/87fe237c-8920-4085-86d6-854d98bc53bb/success-1-6297.mp3?v=1649508543394"
+        ></audio>
       </a-assets>
 
       <!-- Main Settings-->
@@ -164,10 +166,10 @@
         color="gray"
       ></a-plane>
       <a-sky color="#ECECEC"></a-sky>
-  <!--a-sound src="#success" autoplay="true" position="0 2 5" loop="true"></a-sound-->
-      
+      <!--a-sound src="#success" autoplay="true" position="0 2 5" loop="true"></a-sound-->
+
       <!--Warehouse-->
- <a-entity
+      <a-entity
         gltf-model="#warehouse"
         src="#scifi"
         repeat="100 100"
@@ -180,19 +182,74 @@
         modify-materials
         shadow="receive: true"
       >
-      
-   <!-- Final Banner-->
+        <!-- Final Banner-->
       </a-entity>
-        <a-entity id="messagePlane" geometry="primitive: plane; width: 8; height: 4" material="opacity: 0; src: #hud4; transparent: true" position="0 3 -70;" text="value: Congratulations on completing the level! \n \n Press the green button \n to retun to the main menu.;align: center; color: #df9200"
-                  animation__banner="property: components.material.material.opacity;
+
+      <a-entity
+        id="messagePlane"
+        geometry="primitive: plane; width: 8; height: 4"
+        material="opacity: 0; src: #hud4; transparent: true"
+        position="0 3 -70;"
+        text="value: Congratulations on completing the level! \n \n Press the green button \n to retun to the main menu.;align: center; color: #df9200"
+        animation__banner="property: components.material.material.opacity;
                                      to: 1;
                                      startEvents: read_message;
                                      dur: 3500;
-                                     easing: easeInCubic"></a-entity>
-        <a-cylinder position="2.39197 0.4 -66" material="" geometry="height: 2; radius: 0.17">
-      <a-sphere id="menu-button" position="0 1 0" radius="0.18" color="green"></a-sphere>
+                                     easing: easeInCubic"
+      ></a-entity>
+      <a-cylinder
+        position="2.39197 0.4 -66"
+        material=""
+        geometry="height: 2; radius: 0.17"
+      >
+        <a-sphere
+          id="menu-button"
+          position="0 1 0"
+          radius="0.18"
+          color="green"
+        ></a-sphere>
       </a-cylinder>
- 
+
+      <!-- Transparency Panel-->
+      <a-plane
+        side="double"
+        id="tset"
+        position="-5 5 -10"
+        height="2"
+        width="1"
+        color="#4D2C61"
+      >
+        <a-plane
+          id="t50"
+          position="0 0.6 0.03"
+          width="0.55"
+          height="0.3"
+          color="black"
+          text="value:50%; align: center; width: 5"
+        >
+        </a-plane>
+
+        <a-plane
+          id="t75"
+          position="0 0 0.03"
+          width="0.55"
+          height="0.3"
+          color="black"
+          text="value:75%; align: center; width: 5"
+        >
+        </a-plane>
+
+        <a-plane
+          id="t100"
+          position="0 -0.6 0.03"
+          width="0.55"
+          height="0.3"
+          color="black"
+          text="value:100%; align: center; width: 5"
+        >
+        </a-plane>
+      </a-plane>
+
       <!--STEP 1-->
 
       <a-entity>
@@ -210,7 +267,6 @@
                                     dur: 1500; 
                                     to: 0 -10 -20"
           sound="src: #success; on: correct1; positional: false"
-          
         >
         </a-plane>
 
@@ -246,8 +302,8 @@
           text="value: Hello"
         >
         </a-plane>
-        
-       <!--Screen-->
+
+        <!--Screen-->
         <a-plane
           id="text1"
           src="#hud"
@@ -256,41 +312,51 @@
           height="2"
           color="white"
           side="double"
-          text="value: Hello; align: center; width: 10; color: #d9d9d9"      
+          text="value: Hello; align: center; width: 10; color: #d9d9d9"
         >
-      
         </a-plane>
 
-        <a-box
-          repeat=" 1 1"
+        <a-entity
+          
           id="box1"
           shadow="receive: true;cast: true"
           position="-1.5 1.5 -8"
-          width="1"
-          depth="1"
-          height="1"
-          color="black"
+          geometry="primitive: box; width: 1; height: 1; depth: 1"
+          material="color: #000000; transparent: true; opacity: 1"
           animation="property: position; 
                            to: -1.5 1.5 -18; 
                            dur: 4000;
                            dir: alternate;
                            easing: linear; 
                            loop: true"
+          class="dimmable"
          
-          
+                  text="value: Hello World; align: center; side: double; width: 7; zOffset: 0.501"
         >
-          <a-text
-            id="1"
-            position="0 0 0.501"
-            value=""
-            align="center"
-            width="7"
-            color="#d9d9d9"
-           
-          ></a-text>
-        </a-box>
 
-        <a-box
+        </a-entity>
+        <a-entity
+          
+          id="box100"
+          shadow="receive: true;cast: true"
+          position="-1.5 1.5 -8"
+          geometry="primitive: box; width: 1; height: 1; depth: 1"
+          material="color: #000000; transparent: true; opacity: 1"
+          animation="property: position; 
+                           to: -1.5 1.5 -18; 
+                           dur: 4000;
+                           dir: alternate;
+                           easing: linear; 
+                           loop: true"
+       
+          stereo="eye: right"
+            
+        >
+
+        </a-entity>
+
+
+        <!--a-box
           id="box2"
           position="1.5 1.5 -8"
           shadow="receive: true;cast: true"
@@ -313,9 +379,48 @@
             width="7"
             color="#d9d9d9"
           ></a-text>
-        </a-box>
+        </a-box-->
+        <a-entity
+          
+          id="box2"
+          shadow="receive: true;cast: true"
+          position="1.5 1.5 -8"
+          geometry="primitive: box; width: 1; height: 1; depth: 1"
+          material="color: #000000; transparent: true; opacity: 1"
+          animation="property: position; 
+                           to: 1.5 1.5 -18; 
+                           dur: 4000;
+                           dir: alternate;
+                           easing: linear; 
+                           loop: true"
+          class="dimmable"
+          
+                  text="value: Hello World; align: center; side: double; width: 7; zOffset: 0.501"
+        >
 
-        <a-box
+        </a-entity>
+        <a-entity
+          
+          id="box200"
+          shadow="receive: true;cast: true"
+          position="1.5 1.5 -8"
+          geometry="primitive: box; width: 1; height: 1; depth: 1"
+          material="color: #000000; transparent: true; opacity: 1"
+          animation="property: position; 
+                           to: 1.5 1.5 -18; 
+                           dur: 4000;
+                           dir: alternate;
+                           easing: linear; 
+                           loop: true"
+       
+          stereo="eye: right"
+    
+            
+        >
+
+        </a-entity>
+
+        <!--a-box
           id="box3"
           position="4 1.5 -8"
           shadow="receive: true;cast: true"
@@ -338,9 +443,47 @@
             width="7"
             color="#d9d9d9"
           ></a-text>
-        </a-box>
+        </a-box-->
+        <a-entity
+          
+          id="box3"
+          shadow="receive: true;cast: true"
+          position="4 1.5 -8"
+          geometry="primitive: box; width: 1; height: 1; depth: 1"
+          material="color: #000000; transparent: true; opacity: 1"
+          animation="property: position; 
+                           to: 4 1.5 -18; 
+                           dur: 4000;
+                           dir: alternate;
+                           easing: linear; 
+                           loop: true"
+          class="dimmable"
+          
+                  text="value: Hello World; align: center; side: double; width: 7; zOffset: 0.501"
+        >
 
-        <a-box
+        </a-entity>
+        <a-entity
+          
+          id="box300"
+          shadow="receive: true;cast: true"
+          position="4 1.5 -8"
+          geometry="primitive: box; width: 1; height: 1; depth: 1"
+          material="color: #000000; transparent: true; opacity: 1"
+          animation="property: position; 
+                           to: 4 1.5 -18; 
+                           dur: 4000;
+                           dir: alternate;
+                           easing: linear; 
+                           loop: true"
+       
+          stereo="eye: right"
+            
+        >
+
+        </a-entity>
+
+        <!--a-box
           id="box4"
           position="-4 1.5 -8"
           shadow="receive: true;cast: true"
@@ -363,7 +506,46 @@
             width="7"
             color="#d9d9d9"
           ></a-text>
-        </a-box>
+        </a-box-->
+        <a-entity
+          
+          id="box4"
+          shadow="receive: true;cast: true"
+          position="-4 1.5 -8"
+          geometry="primitive: box; width: 1; height: 1; depth: 1"
+          material="color: #000000; transparent: true; opacity: 1"
+          animation="property: position; 
+                           to: -4 1.5 -18; 
+                           dur: 4000;
+                           dir: alternate;
+                           easing: linear; 
+                           loop: true"
+          class="dimmable"
+          
+                  text="value: Hello World; align: center; side: double; width: 7; zOffset: 0.501"
+        >
+
+        </a-entity>
+        <a-entity
+          
+          id="box400"
+          shadow="receive: true;cast: true"
+          position="-4 1.5 -8"
+          geometry="primitive: box; width: 1; height: 1; depth: 1"
+          material="color: #000000; transparent: true; opacity: 1"
+          animation="property: position; 
+                           to: -4 1.5 -18; 
+                           dur: 4000;
+                           dir: alternate;
+                           easing: linear; 
+                           loop: true"
+       
+          stereo="eye: right"
+
+            
+        >
+
+        </a-entity>
       </a-entity>
 
       <!--STEP 2-->
@@ -380,9 +562,7 @@
           color="white"
           side="double"
           text="value: Hello; align: center; width: 10; color: #186fcc"
-        
         >
-
         </a-plane>
 
         <a-box
@@ -500,7 +680,6 @@
           side="double"
           text="value: Hello; align: center; width: 10; color:#cca838"
         >
-        
         </a-plane>
 
         <a-box
@@ -683,65 +862,91 @@
       var result2 = buildTree(n).toString();
       var result3 = buildTree(n).toString();
 
-      document.getElementById("text1").setAttribute('text', 'value', result1[0]);
-      document.getElementById("text2").setAttribute('text', 'value', result2[0]);
-      document.getElementById("text3").setAttribute('text', 'value', result3[0]);
+      document
+        .getElementById("text1")
+        .setAttribute("text", "value", result1[0]);
+      document
+        .getElementById("text2")
+        .setAttribute("text", "value", result2[0]);
+      document
+        .getElementById("text3")
+        .setAttribute("text", "value", result3[0]);
 
       var random_id1 = Math.floor(Math.random() * 4 + 1);
       var random_id2 = Math.floor(Math.random() * 4 + 5);
       var random_id3 = Math.floor(Math.random() * 4 + 9);
 
       document
-        .getElementById("" + 1)
-        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+        .getElementById("box" + 1)
+        .setAttribute('text','value', Math.floor(Math.random() * 30 - 15));
       document
-        .getElementById("" + 2)
-        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+        .getElementById("box" + 2)
+        .setAttribute("text","value", Math.floor(Math.random() * 30 - 15));
       document
-        .getElementById("" + 3)
-        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+        .getElementById("box" + 3)
+        .setAttribute("text","value", Math.floor(Math.random() * 30 - 15));
       document
-        .getElementById("" + 4)
-        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+        .getElementById("box" + 4)
+        .setAttribute("text","value", Math.floor(Math.random() * 30 - 15));
       document
         .getElementById("" + 5)
-        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+        .setAttribute("text","value", Math.floor(Math.random() * 30 - 15));
       document
         .getElementById("" + 6)
-        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+        .setAttribute("text","value", Math.floor(Math.random() * 30 - 15));
       document
         .getElementById("" + 7)
-        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+        .setAttribute("text","value", Math.floor(Math.random() * 30 - 15));
       document
         .getElementById("" + 8)
-        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+        .setAttribute("text","value", Math.floor(Math.random() * 30 - 15));
       document
         .getElementById("" + 9)
-        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+        .setAttribute("text","value", Math.floor(Math.random() * 30 - 15));
       document
         .getElementById("" + 10)
-        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+        .setAttribute("text","value", Math.floor(Math.random() * 30 - 15));
       document
         .getElementById("" + 11)
-        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+        .setAttribute("text","value", Math.floor(Math.random() * 30 - 15));
       document
         .getElementById("" + 12)
-        .setAttribute("value", Math.floor(Math.random() * 30 - 15));
+        .setAttribute("text","value", Math.floor(Math.random() * 30 - 15));
       document
-        .getElementById("" + random_id1)
-        .setAttribute("value", result1[1]);
+        .getElementById("box" + random_id1)
+        .setAttribute("text","value", result1[1]);
       document
         .getElementById("" + random_id2)
-        .setAttribute("value", result2[1]);
+        .setAttribute("text","value", result2[1]);
       document
         .getElementById("" + random_id3)
-        .setAttribute("value", result3[1]);
+        .setAttribute("text","value", result3[1]);
       var sceneEl = document.querySelector("a-scene");
       var camObj = sceneEl.querySelector("#cam");
+      var dimmable_box = sceneEl.querySelectorAll(".dimmable");
       var correct_box1 = sceneEl.querySelector("#box" + random_id1);
       var correct_box2 = sceneEl.querySelector("#box" + random_id2);
       var correct_box3 = sceneEl.querySelector("#box" + random_id3);
+      var dim_button1 = sceneEl.querySelector("#t50");
+      var dim_button2 = sceneEl.querySelector("#t75");
+      var dim_button3 = sceneEl.querySelector("#t100");
 
+      dim_button1.addEventListener("click", function () {
+        for (var i = 0; i < dimmable_box.length; i++) {
+          dimmable_box[i].setAttribute("material", "opacity", 0.5);
+          dimmable_box[i].setAttribute("text", "opacity", 0.5);
+        }
+      });
+      dim_button2.addEventListener("click", function () {
+        for (var i = 0; i < dimmable_box.length; i++) {
+          dimmable_box[i].setAttribute("material", "opacity", 0.75);
+        }
+      });
+      dim_button3.addEventListener("click", function () {
+        for (var i = 0; i < dimmable_box.length; i++) {
+          dimmable_box[i].setAttribute("material", "opacity", 1);
+        }
+      });      
       //for (let i = 1; i < 4; i++) {
       //  if ((i = random_id1)) {
       //    continue;
@@ -770,31 +975,32 @@
       });
       correct_box3.addEventListener("click", function () {
         var door3 = sceneEl.querySelector("#door3");
-        var messagePlane = sceneEl.querySelector("#messagePlane")
+        var messagePlane = sceneEl.querySelector("#messagePlane");
         door3.emit("correct3", null, false);
         camObj.emit("correct333", null, false);
-        messagePlane.emit("read_message",null,false);
+        messagePlane.emit("read_message", null, false);
       });
-      
-      function change_page(){
-  window.location.href = "index.html";
-} 
-      sceneEl.querySelector("#menu-button").addEventListener('click',change_page);
+
+      function change_page() {
+        window.location.href = "index.html";
+      }
+      sceneEl
+        .querySelector("#menu-button")
+        .addEventListener("click", change_page);
     </script>
-    
+
     <!--Color Generator-->
     <script>
       function generateRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
+        var letters = "0123456789ABCDEF";
+        var color = "#";
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
 
-var randomColor=generateRandomColor(); //"#F10531"
+      var randomColor = generateRandomColor(); //"#F10531"
     </script>
-    
   </body>
 </html>
